@@ -9,23 +9,28 @@
   <div class="App">
 
     <!-- HEADER -->
-    <div class="header" style = "text-align: center;">
-      <!-- <p>This image optimizer uses a smart combination of the best optimization and lossy compression algorithms to
+
+      <div class="header" style="text-align: center;">
+        <!-- <p>This image optimizer uses a smart combination of the best optimization and lossy compression algorithms to
         shrink JPEG, GIF and PNG images to the minimum possible size while keeping the required level of quality.</p> -->
-      Insert image compression rate: <input id="compressionRate" type='text' style = 'width: 20px;border-radius: 5px;border:none; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'> %
-    </div>
-
-    <!--  CONTAINER FOR FILE -->
-    <div class="file-container">
-
-      <div class="input-file-container">
-        <p>Drag & Drop to Upload File</p>
-        <p>OR</p>
-        <button>Browse File</button>
-        <input type='file' hidden>
+        Insert image compression rate: <input id="compressionRate" type='number' name="compressionRate" min="0"
+          max="100"
+          style='font-size:20px; width: 50px;border-radius: 5px;border:none; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
+        %
       </div>
 
-    </div>
+      <!--  CONTAINER FOR FILE -->
+      <div class="file-container">
+
+        <div class="input-file-container">
+          <p>Drag & Drop to Upload File</p>
+          <p>OR</p>
+          <button>Browse File</button>
+          <input id="image-file" type='file' name='image-file' hidden>
+        </div>
+
+      </div>
+
 
     <!--  FOOTER -->
     <div class="footer">
@@ -52,7 +57,7 @@
     //getting user select file and [0] this means if user select multiple files then we'll select only the first one
     file = this.files[0];
     dropArea.classList.add("active");
-    showFile(); //calling function
+    sendFile(); //calling function
   });
 
   //If user Drag File Over DropArea
@@ -72,20 +77,25 @@
     event.preventDefault(); //preventing from default behaviour
     //getting user select file and [0] this means if user select multiple files then we'll select only the first one
     file = event.dataTransfer.files[0];
-    showFile(); //calling function
+    sendFile(); //calling function
   });
 
-  function showFile() {
+  function sendFile() {
     let fileType = file.type; //getting selected file type
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
     if (validExtensions.includes(fileType)) { //if user selected file is an image file
       let fileReader = new FileReader(); //creating new FileReader object
       fileReader.onload = () => {
         let fileURL = fileReader.result; //passing user file source in fileURL variable
+        // let photo = document.getElementById("image-file").files[0];
+        // let formData = new FormData();
 
-        // buat request ke backend
-        // let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute
-        // dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+        // formData.append("photo", photo);
+        // fetch('http://localhost:8000/event/', {
+        //   method: "POST",
+        //   body: formData
+        // });
+
       }
       fileReader.readAsDataURL(file);
     } else {
@@ -94,6 +104,7 @@
       dragText.textContent = "Drag & Drop to Upload File";
     }
   }
+
 </script>
 
 </html>

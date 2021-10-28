@@ -1,32 +1,99 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div class="App">
-        <!-- HEADER -->
-        <div class="header">
-          <p>This image optimizer uses a smart combination of the best optimization and lossy compression algorithms to shrink JPEG, GIF and PNG images to the minimum possible size while keeping the required level of quality.</p>
-  
-        </div>
-  
-        <!--  CONTAINER FOR FILE -->
-        <div class="file-container">
-          <button onClick = "">Upload File</button>
-          <div class="input-file-container">
-            <p>Drop your file here</p>
-          </div>
-  
-        </div>
-  
-        <!--  FOOTER -->
-        <div class="footer">
-        <p>Tubes Algeo 2</p>
-        <p>©  Kelompok 22 | IF20</p>
-        </div>
+  <div class="App">
+
+    <!-- HEADER -->
+    <div class="header">
+      <p>This image optimizer uses a smart combination of the best optimization and lossy compression algorithms to
+        shrink JPEG, GIF and PNG images to the minimum possible size while keeping the required level of quality.</p>
+
+    </div>
+
+    <!--  CONTAINER FOR FILE -->
+    <div class="file-container">
+
+      <div class="input-file-container">
+        <p>Drag & Drop to Upload File</p>
+        <p>OR</p>
+        <button>Browse File</button>
+        <input type='file' hidden>
       </div>
 
+    </div>
+
+    <!--  FOOTER -->
+    <div class="footer">
+      <p>Tubes Algeo 2</p>
+      <p>© Kelompok 22 | IF20</p>
+    </div>
+
+  </div>
+
 </body>
+
+<script>
+  const dropArea = document.querySelector(".file-container"),
+    dragText = dropArea.querySelector("p"),
+    button = dropArea.querySelector("button"),
+    input = dropArea.querySelector("input");
+
+  let file; //this is a global variable and we'll use it inside multiple functions
+  button.onclick = () => {
+    input.click(); //if user click on the button then the input also clicked
+  }
+
+  input.addEventListener("change", function () {
+    //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+    file = this.files[0];
+    dropArea.classList.add("active");
+    showFile(); //calling function
+  });
+
+  //If user Drag File Over DropArea
+  dropArea.addEventListener("dragover", (event) => {
+    event.preventDefault(); //preventing from default behaviour
+    dropArea.classList.add("active");
+    dragText.textContent = "Release to Upload File";
+  });
+
+  //If user leave dragged File from DropArea
+  dropArea.addEventListener("dragleave", () => {
+    dropArea.classList.remove("active");
+    dragText.textContent = "Drag & Drop to Upload File";
+  });
+  //If user drop File on DropArea
+  dropArea.addEventListener("drop", (event) => {
+    event.preventDefault(); //preventing from default behaviour
+    //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+    file = event.dataTransfer.files[0];
+    showFile(); //calling function
+  });
+
+  function showFile() {
+    let fileType = file.type; //getting selected file type
+    let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
+    if (validExtensions.includes(fileType)) { //if user selected file is an image file
+      let fileReader = new FileReader(); //creating new FileReader object
+      fileReader.onload = () => {
+        let fileURL = fileReader.result; //passing user file source in fileURL variable
+
+        // buat request ke backend
+        // let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute
+        // dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+      }
+      fileReader.readAsDataURL(file);
+    } else {
+      alert("This is not an Image File!");
+      dropArea.classList.remove("active");
+      dragText.textContent = "Drag & Drop to Upload File";
+    }
+  }
+</script>
 
 </html>

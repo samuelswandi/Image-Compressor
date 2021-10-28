@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&family=Sen&display=swap');
 * {
-  font-family: "Helvetica Neue";
+  font-family: 'Sen', sans-serif;
   margin: 0px;
 }
 
@@ -27,7 +26,8 @@ body {
   margin: auto;
   margin-top: 50px;
   margin-bottom: 50px;
-  font-size: 25px;
+  font-size: 20px;
+  text-align: center;
 }
 
 #compressionRate {
@@ -72,7 +72,7 @@ label:hover {
 
 #compressButton {
   margin-top: auto;
-  margin-bottom:auto;
+  margin-bottom: auto;
   width: 200px;
   height: 80px;
   border: 1px solid blue;
@@ -92,6 +92,7 @@ label:hover {
 
 .image {
   display: flex;
+  column-gap: 10px ;
   color: #bed0f2;
 }
 
@@ -107,8 +108,8 @@ label:hover {
 }
 
 #before {
-  margin:auto;
-  object-fit:contain;
+  margin: auto;
+  object-fit: contain;
   max-width: 100%;
   height: 100%;
 }
@@ -124,10 +125,9 @@ label:hover {
   text-align: center;
 }
 
-
 #after {
-  margin:auto;
-  object-fit:contain;
+  margin: auto;
+  object-fit: contain;
   max-width: 100%;
   height: 100%;
 }

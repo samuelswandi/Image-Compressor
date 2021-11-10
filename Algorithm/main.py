@@ -1,19 +1,13 @@
 import matplotlib.pyplot as plt
 import time
+import numpy as np
 from compress import *
 
 def main(file, percentage):
     Red, Green, Blue, oriImage = openImage(file)
 
-    imageWidth = oriImage.width
-    print(imageWidth)
-    imageHeight = oriImage.height
-    print(imageHeight)
-    originalSize = imageWidth * imageHeight * 3
-
-    compressedSize = percentage * originalSize
+    imageWidth, imageHeight, compressedSize = compressedFileSize(file, percentage)
     singularCount = int(compressedSize//((1 + imageWidth + imageHeight)*3))
-    print(singularCount)
 
     RedCompressed = compress(Red, singularCount)
     GreenCompressed = compress(Green, singularCount)
@@ -25,7 +19,7 @@ def main(file, percentage):
 
     compressedImage = Image.merge("RGB", (imgRed, imgGreen, imgBlue))
 
-    #  Save Image
+    # Save Image
     filename = file.split(".")
     compressedImage.save(os.getcwd() + "//Result//" + filename[0] + f"_compressed_{str(percentage*100)[:2]}." + filename[1])
 
@@ -33,9 +27,10 @@ def main(file, percentage):
 
 
 if __name__ == "__main__":
+    print(f"Estimated Compressed Time: {predictCompressTime(compressedFileSize('image.png', 0.5)[2])}")
     start_time = time.time()
-    img = main('lena.png', 0.2)
+    img = main('image.png', 0.5)
     plt.imshow(img)
     plt.axis('off')
-    plt.show()
     print("--- %s seconds ---" % (time.time() - start_time))
+    plt.show()

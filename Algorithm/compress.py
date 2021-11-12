@@ -14,7 +14,21 @@ def openImage(imagePath):
     aGreen = im[:, :, 1]
     aBlue = im[:, :, 2]
 
-    return [aRed, aGreen, aBlue, imOrig]
+    return [aRed, aGreen, aBlue]
+
+def openImageAlpha(imagePath):
+    cwd = os.getcwd()
+    imOrig = Image.open(cwd + '\\Image\\' + imagePath)
+    imOrig = imOrig.convert("RGBA")
+    im = numpy.array(imOrig)
+    # print(im.shape)
+
+    aRed = im[:, :, 0]
+    aGreen = im[:, :, 1]
+    aBlue = im[:, :, 2]
+    aAlpha = im[:, :, 3]
+
+    return [aRed, aGreen, aBlue, aAlpha]
 
 def compress(channelDataMatrix, k):
     sChannel, uChannel, vhChannel = svd(channelDataMatrix, k)
@@ -24,7 +38,8 @@ def compress(channelDataMatrix, k):
     return compressed
 
 def compressedFileSize(file, percentage):
-    oriImage = openImage(file)[3]
+    cwd = os.getcwd()
+    oriImage = Image.open(cwd + '\\Image\\' + file)
     imageWidth = oriImage.width
     imageHeight = oriImage.height
     originalSize = imageWidth * imageHeight * 3

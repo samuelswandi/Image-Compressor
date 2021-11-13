@@ -22,20 +22,24 @@ def main(file, percentage):
         imgGreen = (Image.fromarray(GreenCompressed, mode=None)).convert('L')
         imgBlue = (Image.fromarray(BlueCompressed, mode=None)).convert('L')
         imgAlpha = (Image.fromarray(Alpha, mode=None)).convert('L')
+        
 
         compressedImage = Image.merge("RGBA", (imgRed, imgGreen, imgBlue, imgAlpha))
 
+        oriImage = np.array(oriImage)
+        compressedImage1 = np.array(compressedImage)
     except OSError:
+
         compressedImage = Image.merge("RGB", (imgRed, imgGreen, imgBlue))
 
-    oriImage = np.array(oriImage)
-    oriImage = oriImage[:,:,:3]
-    compressedImage1 = np.array(compressedImage)
+        oriImage = oriImage[:,:,:3]
+        compressedImage1 = compressedImage1[:,:,:3]
 
     diff = cv2.absdiff(oriImage.astype(np.float32), compressedImage1.astype(np.float32))
     pixelDiff = round((np.count_nonzero(diff)*100)/diff.size, 2)
 
     cTime = (time.time() - start_time)
+    cTime = round(cTime, 2)
 
     buffered = io.BytesIO()
     compressedImage.save(buffered, format="PNG")

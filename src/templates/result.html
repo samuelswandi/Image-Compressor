@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./styles2.css') }}" />
+    <title>Image Compressor</title>
+</head>
+
+<body>
+    <div class="App">
+        <!-- HEADER -->
+
+        <div class="header">
+            <H1>IMAGE COMPRESSOR</H1>
+            <h6>by LUCKY SWANDI</h6>
+            <br>
+        </div>
+
+        <!--  CONTAINER FOR BEFORE AND AFTER PHOTO -->
+        <div class="image">
+            <div class="image-container">
+                {% if imageBefore %}
+                <div class='result'>
+                    <img id="before" src="data:image/png;base64,{{ imageBefore }}" />
+                    <p>Before</p>
+                </div>
+                {% endif %}
+
+                <div class='result'>
+                    <img id="before" src="data:image/png;base64,{{ imageAfter }}" />
+                    <p>After</p>
+                </div>
+            </div>
+
+            <br><br>
+
+            <!-- FOR COMPRESSING AND DOWNLOAD IMAGE -->
+            <div class="buttons">
+                {% if pixelPercentage %}
+                <br>
+                <p>
+                    Image pixel difference percentage: <strong>{{pixelPercentage}} %</strong>
+                </p>
+                {% endif %}
+                {% if compressionTime %}
+                <br>
+                <p>
+                    Image compression time: <strong>{{compressionTime}} S</strong>
+                </p>
+                {% endif %}
+
+                {% if pixelPercentage %}
+                <button id="downloadButton">Download image</button>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="form-input">
+            <form method="post" action="/" enctype="multipart/form-data" id="main-form" onsubmit="resultShow()">
+                <h2>Compress another image:</h2> <br>
+                Insert image compression rate: <input id="compressionRate" type='number' name="compressionRate" min="0"
+                    max="100" required> %
+                <div class="file-input">
+                    <input type="file" id="image-file" class="image-file" name='image-file' accept="image/*" required>
+                    <br>
+                </div>
+                <input type="submit" value="Compress Image" id="compressButton">
+            </form>
+        </div>
+
+        <!--  FOOTER -->
+        <div class="footer">
+            <footer>Tubes Algeo 2</footer>
+            <footer>© Kelompok 22 | IF20</footer>
+            <br>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+
+</script>
+
+</html>

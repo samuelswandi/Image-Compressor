@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='./styles.css') }}" />
+  <title>Image Compressor</title>
+</head>
+
+<body>
+  <div class="App">
+
+    <!-- HEADER -->
+
+    <div class="header">
+      <H1>IMAGE COMPRESSOR</H1>
+      <h6>by LUCKY SWANDI</h6>
+      <br>  
+    </div>
+
+    <div class="form-input">
+        <form method="post" action="/" enctype="multipart/form-data" id = "main-form" onsubmit= "resultShow()">
+            Insert image compression rate: 
+             <input id="compressionRate" type='number' name="compressionRate" min="0"
+              max="100" required> %
+            <div class="file-input">
+              <input type="file" id="image-file" class="image-file" name='image-file' accept="image/*"required> <br>
+            </div>
+          <input type="submit" value="Compress Image" id="compressButton">
+      </form>
+    </div>
+
+
+    <!--  FOOTER -->
+    <div class='footer'>
+      <footer>Tubes Algeo 2</footer>
+      <footer>© Kelompok 22 | IF20</footer>
+      <br>
+    </div>
+  </div>
+
+</body>
+
+<script>
+
+</script>
+
+</html>

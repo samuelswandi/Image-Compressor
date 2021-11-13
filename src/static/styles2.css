@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&family=Sen&display=swap');
+
+* {
+    font-family: 'Sen', sans-serif;
+    margin: 0px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+.header {
+    /* height: 700px;*/
+    width: 100%;
+    color: white;
+    margin: auto;
+    margin-top: 1%;
+    font-size: 1.25vw;
+    text-align: center;
+}
+
+.form-input {
+
+    color: blue;
+    background-color: white;
+    padding-top:4vw;
+    padding-bottom: 4vw;
+    border-radius: 2vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 50vw;
+    margin: auto;
+    margin-top: 5vw;
+    font-size: 1vw;
+    text-align: center;
+
+}
+
+#compressionRate {
+    color:blue;
+    font-size: 1vw;
+    width: 2.5vw;
+    border-radius: 5px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.file-input {
+    margin-top: 20px;
+}
+
+.image-file {
+    width: 80%;
+    margin: auto;
+    border: 1px solid blue;
+    background-color: white;
+    color: blue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5px;
+    padding: 1vw;
+    font-size: 1vw;
+}
+
+
+label:hover {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+.buttons {
+    color: white;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1vw;
+}
+
+#compressButton {
+    margin-top: 1vw;
+    margin-bottom: auto;
+    width: 10vw;
+    height: 3vw;
+    border: 1px solid blue;
+    background-color: white;
+    color: blue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5px;
+    font-size: 1vw;
+}
+
+#compressButton:hover {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+#downloadButton {
+    margin-top: 1vw;
+    margin-bottom: auto;
+    width: 10vw;
+    height: 3vw;
+    border: 1px solid blue;
+    background-color: white;
+    color: blue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5px;
+    font-size: 1vw;
+}
+
+#downloadButton:hover {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+.image-container {
+    display:flex ;
+    column-gap: 2vw;
+}
+
+.image {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    color: #bed0f2;
+    margin-bottom: 2vw;
+}
+
+.result {
+    background-color: white;
+    border-radius:1vw;
+    margin-top: 10vw;
+    margin: auto;
+    width: 50vw;
+    height: 30vw;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    text-align: center;
+    font-size: 1vw;
+}
+
+#before {
+    margin: auto;
+    object-fit: contain;
+    max-width: 100%;
+    height: 100%;
+}
+
+
+.footer {
+    color: white;
+    margin-top:2vw;
+    bottom: 500vw;
+    width: 100%;
+    text-align: center;
+    font-size: 1.25vw;
+
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

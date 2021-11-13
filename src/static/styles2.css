@@ -153,6 +153,13 @@ label:hover {
     height: 100%;
 }
 
+#after {
+    margin: auto;
+    object-fit: contain;
+    max-width: 100%;
+    height: 100%;
+}
+
 
 .footer {
     color: white;

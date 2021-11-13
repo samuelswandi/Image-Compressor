@@ -28,7 +28,7 @@
                 {% endif %}
 
                 <div class='result'>
-                    <img id="before" src="data:image/png;base64,{{ imageAfter }}" />
+                    <img id="after" src="data:image/png;base64,{{ imageAfter }}" />
                     <p>After</p>
                 </div>
             </div>
@@ -81,8 +81,7 @@
 
 </body>
 
-<script>
-
-</script>
+<script src="{{url_for('static', filename='script.js') }}"></script>
+<script src="{{url_for('static', filename='fileSaver.js') }}"></script>
 
 </html>

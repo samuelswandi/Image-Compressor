@@ -14,7 +14,7 @@ def openImage(imagePath):
     aGreen = im[:, :, 1]
     aBlue = im[:, :, 2]
 
-    return [aRed, aGreen, aBlue]
+    return [imOrig, aRed, aGreen, aBlue]
 
 def openImageAlpha(imagePath):
     cwd = os.getcwd()
@@ -28,7 +28,7 @@ def openImageAlpha(imagePath):
     aBlue = im[:, :, 2]
     aAlpha = im[:, :, 3]
 
-    return [aRed, aGreen, aBlue, aAlpha]
+    return [imOrig, aRed, aGreen, aBlue, aAlpha]
 
 def compress(channelDataMatrix, k):
     sChannel, uChannel, vhChannel = svd(channelDataMatrix, k)

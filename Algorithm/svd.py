@@ -70,32 +70,43 @@ def svd(A, k=None, epsilon=1e-10):
     singularValues, us, vs = [np.array(x) for x in zip(*svdSoFar)]
     return singularValues, us.T, vs
 
-
-
-# def simultaneous_power_iteration(A, k):
-#     n, m = A.shape
-#     Q = np.random.rand(n, k)
-#     Q, _ = np.linalg.qr(Q)
-#     Q_prev = Q
+def simultaneous_power_iteration(A, k):
+    n, m = A.shape
+    Q = np.random.rand(n, k)
+    Q, _ = np.linalg.qr(Q)
+    Q_prev = Q
  
-#     for i in range(1000):
-#         Z = A.dot(Q)
-#         Q, R = np.linalg.qr(Z)
+    for i in range(1000):
+        Z = A.dot(Q)
+        Q, R = np.linalg.qr(Z)
 
-#         # can use other stopping criteria as well 
-#         err = ((Q - Q_prev) ** 2).sum()
-#         if i % 10 == 0:
-#             print(i, err)
+        # can use other stopping criteria as well 
+        err = ((Q - Q_prev) ** 2).sum()
+        if i % 10 == 0:
+            print(i, err)
 
-#         Q_prev = Q
-#         if err < 1e-3:
-#             break
+        Q_prev = Q
+        if err < 1e-3:
+            break
 
-#     return np.diag(R), Q
+    return np.diag(R), Q
 
-# def svd_test(A, k):
-#     V = np.dot(A.T, A)
-#     eigenVal, eigenVec = simultaneous_power_iteration(V, k)
+def svd_test(X, k):
+    M = np.dot(X.T, X)
+    eigenVal, eigenVec = simultaneous_power_iteration(M, k)
+    singVal = np.sqrt(abs(eigenVal))
+    print(singVal)
 
-#     singularVal = 
+    U = np.dot(X, eigenVec)
+    for i in range(k):
+        U[:, i] = U[:, i]/singVal[i]
+
+    Vt = eigenVec.T
+    S = np.diag(singVal)
+    
+    print(U.shape)
+    print(S.shape)
+    print(Vt.shape)
+    
+    return S, U, Vt
 

@@ -1,4 +1,3 @@
-
 const downloadButton = document.querySelector("#downloadButton")
 const image = document.querySelector("#after");
 

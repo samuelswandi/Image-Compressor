@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import time
 import numpy as np
 from algorithm.compress import *
@@ -11,6 +10,9 @@ def main(file, percentage):
     imageWidth, imageHeight, compressedSize = compressedFileSize(file, percentage)
     singularCount = int(compressedSize//((1 + imageWidth + imageHeight)*3))
     start_time = time.time()
+
+    formatName = (file.filename).split(".")
+    formatName = formatName[1].upper()
 
     try:
         oriImage, Red, Green, Blue, Alpha = openImageAlpha(file)
@@ -28,12 +30,19 @@ def main(file, percentage):
 
         oriImage = np.array(oriImage)
         compressedImage1 = np.array(compressedImage)
-    except OSError:
 
+        buffered = io.BytesIO()
+        compressedImage.save(buffered, format=formatName)
+        
+    except OSError:
         compressedImage = Image.merge("RGB", (imgRed, imgGreen, imgBlue))
 
         oriImage = oriImage[:,:,:3]
+        compressedImage1 = np.array(compressedImage)
         compressedImage1 = compressedImage1[:,:,:3]
+
+        buffered = io.BytesIO()
+        compressedImage.save(buffered, format=formatName)
 
     diff = cv2.absdiff(oriImage.astype(np.float32), compressedImage1.astype(np.float32))
     pixelDiff = round((np.count_nonzero(diff)*100)/diff.size, 2)
@@ -41,8 +50,6 @@ def main(file, percentage):
     cTime = (time.time() - start_time)
     cTime = round(cTime, 2)
 
-    buffered = io.BytesIO()
-    compressedImage.save(buffered, format="PNG")
     img_str = base64.b64encode(buffered.getvalue())
 
     return [img_str, cTime, pixelDiff]

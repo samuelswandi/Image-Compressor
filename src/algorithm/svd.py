@@ -9,9 +9,7 @@ def randomUnitVector(n):
     return [x / theNorm for x in unnormalized]
 
 
-def svd_1d(A, epsilon=1e-10):
-    ''' The one-dimensional SVD '''
-
+def svd1D(A, epsilon=1e-10):
     n, m = A.shape
     x = randomUnitVector(min(n,m))
     lastV = None
@@ -29,19 +27,11 @@ def svd_1d(A, epsilon=1e-10):
         currentV = np.dot(B, lastV)
         currentV = currentV / norm(currentV)
 
-        # if iterations == 20:
         if abs(np.dot(currentV, lastV)) > 1 - epsilon:
-#             print("converged in {} iterations!".format(iterations))
             return currentV
 
 
-def svd(A, k=None, epsilon=1e-10):
-    '''
-        Compute the singular value decomposition of a matrix A
-        using the power method. A is the input matrix, and k
-        is the number of singular values you wish to compute.
-        If k is None, this computes the full-rank decomposition.
-    '''
+def svdGreedyMethod(A, k=None, epsilon=1e-10):
     A = np.array(A, dtype=float)
     n, m = A.shape
     svdSoFar = []
@@ -55,12 +45,12 @@ def svd(A, k=None, epsilon=1e-10):
             matrixFor1D -= singularValue * np.outer(u, v)
 
         if n > m:
-            v = svd_1d(matrixFor1D, epsilon=epsilon)  # next singular vector
+            v = svd1D(matrixFor1D, epsilon=epsilon)  # next singular vector
             u_unnormalized = np.dot(A, v)
             sigma = norm(u_unnormalized)  # next singular value
             u = u_unnormalized / sigma
         else:
-            u = svd_1d(matrixFor1D, epsilon=epsilon)  # next singular vector
+            u = svd1D(matrixFor1D, epsilon=epsilon)  # next singular vector
             v_unnormalized = np.dot(A.T, u)
             sigma = norm(v_unnormalized)  # next singular value
             v = v_unnormalized / sigma
@@ -70,7 +60,7 @@ def svd(A, k=None, epsilon=1e-10):
     singularValues, us, vs = [np.array(x) for x in zip(*svdSoFar)]
     return singularValues, us.T, vs
 
-def simultaneous_power_iteration(A, k):
+def eigenSimultaneousPowerIteration(A, k):
     n, m = A.shape
     Q = np.random.rand(n, k)
     Q, _ = np.linalg.qr(Q)
@@ -91,9 +81,9 @@ def simultaneous_power_iteration(A, k):
 
     return np.diag(R), Q
 
-def svd_test(X, k):
+def svdPowerIteration(X, k):
     M = np.dot(X.T, X)
-    eigenVal, eigenVec = simultaneous_power_iteration(M, k)
+    eigenVal, eigenVec = eigenSimultaneousPowerIteration(M, k)
     singVal = np.sqrt(abs(eigenVal))
 
     U = np.dot(X, eigenVec)

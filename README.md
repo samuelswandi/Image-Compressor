@@ -34,9 +34,8 @@ Tugas Besar 2 IF2123 Aljabar Liner dan Geometri
 - For Backend <br>
 ```
  python required
- pip install numpy scipy sklearn
- pip install opencv-python
- pip install flask
+ pip install -r requirements.txt  #for python 2
+ pip3 install -r requirements.txt #for python 3
 ```
 - For FE <br>
 ```

@@ -1,6 +1,4 @@
-# Image Compressor - Algeo02-20044
-Tugas Besar 2 IF2123 Aljabar Liner dan Geometri
-
+# Image Compressor
 
 ## Table of Contents
 * [General Info](#general-information)
